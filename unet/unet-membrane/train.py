@@ -1,6 +1,4 @@
 
-# NEED TO UPDATE BASED ON THE FROM NPY FILE
-
 from model import *
 from data import *
 import os
@@ -30,7 +28,7 @@ data_gen_args = dict(rotation_range=0.2,
 myGene = trainGenerator(2, os.path.join(data_folder, 'membrane/train'),'image','label',data_gen_args,save_to_dir = None)
 model = unet()
 model_checkpoint = ModelCheckpoint('outputs/unet_membrane.hdf5', monitor='loss',verbose=1, save_best_only=True)
-history = model.fit_generator(myGene,steps_per_epoch=100,epochs=10,callbacks=[model_checkpoint])
+history = model.fit_generator(myGene,steps_per_epoch=10,epochs=10,callbacks=[model_checkpoint])
 
 loss = history.history['loss']
 run.log_list('loss', loss, description='Unet loss on membrane dataset')
